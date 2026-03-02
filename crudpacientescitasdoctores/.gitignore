@@ -1,0 +1,41 @@
+# JS specific
+# Ignora la carpeta de compilados de algunos bundlers.
+/dist
+# Ignora dependencias instaladas por npm.
+/node_modules
+# Ignora la carpeta de build generada.
+/build
+# Ignora archivos temporales en /tmp.
+/tmp
+
+# Logs
+# Ignora cualquier carpeta llamada logs.
+logs
+# Ignora archivos con extensión .log.
+*.log
+# Ignora logs de depuración de npm.
+npm-debug.log*
+# Ignora logs de depuración de pnpm.
+pnpm-debug.log*
+# Ignora logs de depuración de yarn.
+yarn-debug.log*
+# Ignora logs de error de yarn.
+yarn-error.log*
+# Ignora logs de depuración de lerna.
+lerna-debug.log*
+
+# dotenv environment variable files
+# Ignora archivo .env general.
+.env
+# Ignora variables de entorno para desarrollo.
+.env.development
+# Ignora variables de entorno para pruebas.
+.env.test
+# Ignora variables de entorno para producción.
+.env.production
+
+# temp directory
+# Ignora carpeta temporal .temp.
+.temp
+# Ignora carpeta temporal .tmp.
+.tmp
