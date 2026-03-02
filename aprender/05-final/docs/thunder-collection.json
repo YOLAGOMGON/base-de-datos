@@ -1,0 +1,67 @@
+{
+  "client": "Thunder Client",
+  "collectionName": "Citas Medicas API",
+  "dateExported": "2026-03-01T00:00:00.000Z",
+  "version": "1.1",
+  "requests": [
+    {
+      "_id": "health",
+      "colId": "citas-medicas",
+      "name": "Health",
+      "url": "{{baseUrl}}/health",
+      "method": "GET",
+      "headers": [],
+      "params": [],
+      "body": {}
+    },
+    {
+      "_id": "list-patients",
+      "colId": "citas-medicas",
+      "name": "List Patients",
+      "url": "{{baseUrl}}/patients",
+      "method": "GET",
+      "headers": [],
+      "params": [],
+      "body": {}
+    },
+    {
+      "_id": "create-doctor",
+      "colId": "citas-medicas",
+      "name": "Create Doctor",
+      "url": "{{baseUrl}}/doctors",
+      "method": "POST",
+      "headers": [{ "name": "Content-Type", "value": "application/json" }],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"name\": \"Dra. Perez\",\n  \"specialty\": \"Cardiologia\",\n  \"email\": \"dra.perez@example.com\"\n}"
+      }
+    },
+    {
+      "_id": "create-appointment-sp",
+      "colId": "citas-medicas",
+      "name": "Create Appointment (SP)",
+      "url": "{{baseUrl}}/appointments/sp",
+      "method": "POST",
+      "headers": [{ "name": "Content-Type", "value": "application/json" }],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"patientId\": \"<mongoId>\",\n  \"doctorId\": 1,\n  \"appointmentDate\": \"2026-03-05T10:00:00Z\",\n  \"reason\": \"Consulta\"\n}"
+      }
+    },
+    {
+      "_id": "doctor-agenda",
+      "colId": "citas-medicas",
+      "name": "Doctor Agenda",
+      "url": "{{baseUrl}}/doctors/1/agenda?from=2026-03-01&to=2026-03-31",
+      "method": "GET",
+      "headers": [],
+      "params": [
+        { "name": "from", "value": "2026-03-01" },
+        { "name": "to", "value": "2026-03-31" }
+      ],
+      "body": {}
+    }
+  ]
+}

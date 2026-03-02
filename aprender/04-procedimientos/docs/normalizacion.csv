@@ -1,0 +1,15 @@
+tabla,columna,tipo,descripcion
+patients,id,text,Id del paciente (MongoDB)
+patients,name,text,Nombre del paciente
+patients,email,text,Correo del paciente
+patients,phone,text,Telefono del paciente
+doctors,id,serial,Id del doctor
+doctors,name,text,Nombre del doctor
+doctors,specialty,text,Especialidad
+doctors,email,text,Correo del doctor
+appointments,id,serial,Id de la cita
+appointments,patient_id,text,Referencia al paciente (MongoDB)
+appointments,doctor_id,int,Referencia al doctor (PostgreSQL)
+appointments,appointment_date,timestamp,Fecha y hora de la cita
+appointments,reason,text,Motivo de la cita
+appointments,status,text,Estado de la cita
