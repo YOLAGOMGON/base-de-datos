@@ -1,0 +1,22 @@
+{
+  "name": "citas-medicas-05-final",
+  "version": "1.0.0",
+  "description": "API final con MongoDB, PostgreSQL, procedimientos y tests",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "test": "jest --runInBand"
+  },
+  "dependencies": {
+    "dotenv": "latest",
+    "express": "latest",
+    "mongodb": "latest",
+    "pg": "latest"
+  },
+  "devDependencies": {
+    "jest": "latest",
+    "nodemon": "latest",
+    "supertest": "latest"
+  }
+}

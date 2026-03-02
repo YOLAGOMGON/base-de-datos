@@ -1,0 +1,411 @@
+{
+  "info": {
+    "name": "Riwi Prueba DB",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{base_url}}/health",
+          "host": ["{{base_url}}"],
+          "path": ["health"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status 200\", function () {",
+              "  pm.expect(pm.response.code).to.equal(200);",
+              "});",
+              "pm.test(\"Respuesta JSON\", function () {",
+              "  pm.response.to.be.json;",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Clientes",
+      "item": [
+        {
+          "name": "Crear cliente",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Laura\",\n  \"telefono\": \"555\",\n  \"ciudad\": \"Cali\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/clientes",
+              "host": ["{{base_url}}"],
+              "path": ["clientes"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 201\", function () {",
+                  "  pm.expect(pm.response.code).to.equal(201);",
+                  "});",
+                  "pm.test(\"Tiene id_cliente\", function () {",
+                  "  const data = pm.response.json();",
+                  "  pm.expect(data).to.have.property(\"id_cliente\");",
+                  "});",
+                  "pm.environment.set(\"cliente_id\", pm.response.json().id_cliente);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Listar clientes",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/clientes",
+              "host": ["{{base_url}}"],
+              "path": ["clientes"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", function () {",
+                  "  pm.expect(pm.response.code).to.equal(200);",
+                  "});",
+                  "pm.test(\"Es un arreglo\", function () {",
+                  "  pm.expect(pm.response.json()).to.be.an(\"array\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Obtener cliente",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/clientes/{{cliente_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["clientes", "{{cliente_id}}"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", function () {",
+                  "  pm.expect(pm.response.code).to.equal(200);",
+                  "});",
+                  "pm.test(\"Tiene id_cliente\", function () {",
+                  "  pm.expect(pm.response.json()).to.have.property(\"id_cliente\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Actualizar cliente",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Laura Gomez\",\n  \"telefono\": \"555\",\n  \"ciudad\": \"Cali\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/clientes/{{cliente_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["clientes", "{{cliente_id}}"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", function () {",
+                  "  pm.expect(pm.response.code).to.equal(200);",
+                  "});",
+                  "pm.test(\"Nombre actualizado\", function () {",
+                  "  pm.expect(pm.response.json().nombre).to.eql(\"Laura Gomez\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Eliminar cliente",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/clientes/{{cliente_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["clientes", "{{cliente_id}}"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", function () {",
+                  "  pm.expect(pm.response.code).to.equal(200);",
+                  "});",
+                  "pm.test(\"Mensaje eliminado\", function () {",
+                  "  pm.expect(pm.response.json().message).to.exist;",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Alumnos (MongoDB)",
+      "item": [
+        {
+          "name": "Crear alumno",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Diana\",\n  \"edad\": 21,\n  \"ciudad\": \"Cali\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/alumnos",
+              "host": ["{{base_url}}"],
+              "path": ["alumnos"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 201\", function () {",
+                  "  pm.expect(pm.response.code).to.equal(201);",
+                  "});",
+                  "pm.test(\"Tiene _id\", function () {",
+                  "  pm.expect(pm.response.json()).to.have.property(\"_id\");",
+                  "});",
+                  "pm.environment.set(\"alumno_id\", pm.response.json()._id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Listar alumnos",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/alumnos",
+              "host": ["{{base_url}}"],
+              "path": ["alumnos"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", function () {",
+                  "  pm.expect(pm.response.code).to.equal(200);",
+                  "});",
+                  "pm.test(\"Es un arreglo\", function () {",
+                  "  pm.expect(pm.response.json()).to.be.an(\"array\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Obtener alumno",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/alumnos/{{alumno_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["alumnos", "{{alumno_id}}"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", function () {",
+                  "  pm.expect(pm.response.code).to.equal(200);",
+                  "});",
+                  "pm.test(\"Tiene _id\", function () {",
+                  "  pm.expect(pm.response.json()).to.have.property(\"_id\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Actualizar alumno",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Diana Perez\",\n  \"edad\": 22,\n  \"ciudad\": \"Medellin\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/alumnos/{{alumno_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["alumnos", "{{alumno_id}}"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", function () {",
+                  "  pm.expect(pm.response.code).to.equal(200);",
+                  "});",
+                  "pm.test(\"Ciudad actualizada\", function () {",
+                  "  pm.expect(pm.response.json().ciudad).to.eql(\"Medellin\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Eliminar alumno",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/alumnos/{{alumno_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["alumnos", "{{alumno_id}}"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", function () {",
+                  "  pm.expect(pm.response.code).to.equal(200);",
+                  "});",
+                  "pm.test(\"Mensaje eliminado\", function () {",
+                  "  pm.expect(pm.response.json().message).to.exist;",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Pruebas negativas",
+      "item": [
+        {
+          "name": "Crear cliente sin nombre (400)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"telefono\": \"555\",\n  \"ciudad\": \"Cali\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/clientes",
+              "host": ["{{base_url}}"],
+              "path": ["clientes"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 400\", function () {",
+                  "  pm.expect(pm.response.code).to.equal(400);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Alumno id invalido (400)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/alumnos/123",
+              "host": ["{{base_url}}"],
+              "path": ["alumnos", "123"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 400\", function () {",
+                  "  pm.expect(pm.response.code).to.equal(400);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variable": [
+    { "key": "base_url", "value": "http://localhost:3000" },
+    { "key": "cliente_id", "value": "1" },
+    { "key": "alumno_id", "value": "66f000000000000000000001" }
+  ]
+}

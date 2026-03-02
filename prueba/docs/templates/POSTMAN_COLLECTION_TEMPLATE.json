@@ -1,0 +1,40 @@
+{
+  "info": {
+    "name": "Prueba CRUD",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Crear cliente",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombre\": \"Laura\",\n  \"telefono\": \"555\",\n  \"ciudad\": \"Cali\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/clientes",
+          "host": ["{{base_url}}"],
+          "path": ["clientes"]
+        }
+      }
+    },
+    {
+      "name": "Listar clientes",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{base_url}}/clientes",
+          "host": ["{{base_url}}"],
+          "path": ["clientes"]
+        }
+      }
+    }
+  ],
+  "variable": [
+    { "key": "base_url", "value": "http://localhost:3000" }
+  ]
+}

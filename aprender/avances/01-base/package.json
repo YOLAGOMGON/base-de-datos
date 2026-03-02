@@ -1,0 +1,17 @@
+{
+  "name": "citas-medicas-01-base",
+  "version": "1.0.0",
+  "description": "API base de citas medicas (solo memoria)",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
+  },
+  "dependencies": {
+    "dotenv": "latest",
+    "express": "latest"
+  },
+  "devDependencies": {
+    "nodemon": "latest"
+  }
+}

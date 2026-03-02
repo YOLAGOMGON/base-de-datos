@@ -1,0 +1,19 @@
+{
+  "name": "citas-medicas-04-procedimientos",
+  "version": "1.0.0",
+  "description": "API con procedimientos almacenados en PostgreSQL",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
+  },
+  "dependencies": {
+    "dotenv": "latest",
+    "express": "latest",
+    "mongodb": "latest",
+    "pg": "latest"
+  },
+  "devDependencies": {
+    "nodemon": "latest"
+  }
+}

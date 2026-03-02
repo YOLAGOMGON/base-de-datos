@@ -1,0 +1,79 @@
+{
+  "info": {
+    "name": "Citas Medicas API",
+    "_postman_id": "b0d2b0a2-1111-4444-8888-000000000001",
+    "description": "Coleccion de prueba para la API de citas medicas",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/health",
+          "host": ["{{baseUrl}}"],
+          "path": ["health"]
+        }
+      }
+    },
+    {
+      "name": "List Patients",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/patients",
+          "host": ["{{baseUrl}}"],
+          "path": ["patients"]
+        }
+      }
+    },
+    {
+      "name": "Create Doctor",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Dra. Perez\",\n  \"specialty\": \"Cardiologia\",\n  \"email\": \"dra.perez@example.com\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/doctors",
+          "host": ["{{baseUrl}}"],
+          "path": ["doctors"]
+        }
+      }
+    },
+    {
+      "name": "Create Appointment (SP)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"patientId\": \"<mongoId>\",\n  \"doctorId\": 1,\n  \"appointmentDate\": \"2026-03-05T10:00:00Z\",\n  \"reason\": \"Consulta\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/appointments/sp",
+          "host": ["{{baseUrl}}"],
+          "path": ["appointments", "sp"]
+        }
+      }
+    },
+    {
+      "name": "Doctor Agenda",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/doctors/1/agenda?from=2026-03-01&to=2026-03-31",
+          "host": ["{{baseUrl}}"],
+          "path": ["doctors", "1", "agenda"],
+          "query": [
+            { "key": "from", "value": "2026-03-01" },
+            { "key": "to", "value": "2026-03-31" }
+          ]
+        }
+      }
+    }
+  ]
+}

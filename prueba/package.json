@@ -1,0 +1,25 @@
+{
+  "name": "riwi-db-prueba",
+  "version": "1.0.0",
+  "description": "Proyecto base para prueba de bases de datos",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "excel:generate": "node scripts/generate-excel.js",
+    "excel:normalized": "node scripts/generate-excel-normalized.js",
+    "csv:load": "node scripts/load-csv-postgres.js",
+    "test:api": "newman run docs/postman/riwi_prueba_collection.json -e docs/postman/riwi_prueba_env.json"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongodb": "^6.6.1",
+    "pg": "^8.12.0",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "newman": "^6.1.1",
+    "nodemon": "^3.1.0"
+  }
+}
